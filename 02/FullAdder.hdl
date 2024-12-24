@@ -1,40 +1,24 @@
 // This file is part of www.nand2tetris.org
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
-// File name: projects/02/FullAdder.hdl
+// File name: projects/02/HalfAdder.hdl
 
 /**
- * Computes the sum of three bits.
+ * Computes the sum of two bits.
+ * -x = /x + 1
+ * a - b = a + (-b)
  */
 
-CHIP FullAdder {
-    IN a, b, c;  // 1-bit inputs
-    OUT sum,     // Right bit of a + b + c
-        carry;   // Left bit of a + b + c
+CHIP HalfAdder {
+    IN a, b;    // 1-bit inputs
+    OUT sum,    // Right bit of a + b 
+        carry;  // Left bit of a + b
 
     PARTS:
-    HalfAdder(a=a,b=b,sum=SA,carry=CA);
-    HalfAdder(a=SA,b=c,sum=sum,carry=CB);
-    Or(a=CA,b=CB,out=carry);
-    
-    /*
     Not(in=a,out=na);
     Not(in=b,out=nb);
-    Not(in=c,out=nc);
-    And(a=na,b=nb,out=sa);
-    And(a=sa,b=c,out=Sa);
-    And(a=na,b=b,out=sb);
-    And(a=sb,b=nc,out=Sb);
-    And(a=a,b=b,out=sc);
-    And(a=sc,b=c,out=Sc);
-    And(a=a,b=nb,out=sd);
-    And(a=sd,b=nc,out=Sd);
-    Or(a=Sa,b=Sb,out=RSA);
-    Or(a=Sc,b=Sd,out=RSB);
-    And(a=a,b=c,out=Cb);
-    And(a=b,b=c,out=Cc);
-    Or(a=Ca,b=Cb,out=RCA);
-    Or(a=RSA,b=RSB,out=sum);
-    Or(a=RCA,b=Cc,out=carry);
-    */
+    And(a=na,b=b,out=SA);
+    And(a=a,b=nb,out=SB);
+    Or(a=SA,b=SB,out=sum);
+    And(a=a,b=b,out=carry);
 }
